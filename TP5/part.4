@@ -1,0 +1,289 @@
+li>
+
+      <li>Similarly to the above point, it is impossible to apply
+      to the secondary keys considerations that apply to primary
+      keys. For example, it is not possible to maintain secondary
+      keys by sorted order.</li>
+
+      <li>While the interface "understands" that all equivalent-key
+      values constitute a distinct list (<i>e.g.</i>, through
+      <tt>equal_range</tt>), the underlying data structure
+      typically does not. This means, <i>e.g.</i>, that operations
+      such as erasing from a tree-based container all values whose
+      keys are equivalent to a a given key can be super-linear in
+      the size of the tree; this is also true also for several
+      other operations that target a specific list.</li>
+    </ol>
+
+    <p>In <tt>pb_ds</tt>, therefore, all associative containers map
+    (or store) unique-key values. One can (1) map primary keys to
+    secondary associative-containers (<i>i.e.</i>, containers of
+    secondary keys) or non-associative containers (2) map identical
+    keys to a size-type representing the number of times they
+    occur, or (3) any combination of (1) and (2). Instead of
+    allowing multiple equivalent-key values, <tt>pb_ds</tt>
+    supplies associative containers based on underlying
+    data structures that are suitable as secondary
+    associative-containers (see <a href=
+    "assoc_performance_tests.html#msc">Associative-Container
+    Performance Tests::Observations::Mapping-Semantics
+    Considerations</a>).</p>
+
+    <p>Figures <a href="#embedded_lists_3">Non-unique mapping
+    containers in <tt>pb_ds</tt></a> A and B show the equivalent
+    structures in <tt>pb_ds</tt>'s design, to those in Figures
+    <a href="#embedded_lists_1">Non-unique mapping containers in
+    the STL's design</a> A and B, respectively. Each shaded box
+    represents some size-type or secondary
+    associative-container.</p>
+
+    <h6 class="c1"><a name="embedded_lists_3" id=
+    "embedded_lists_3"><img src="embedded_lists_3.png" alt=
+    "no image" /></a></h6>
+
+    <h6 class="c1">Non-unique mapping containers in the
+    <tt>pb_ds</tt>.</h6>
+
+    <p>In the first example above, then, one would use an
+    associative container mapping each user to an associative
+    container which maps each application id to a start time (see
+    <a href=
+    "http://gcc.gnu.org/viewcvs/*checkout*/trunk/libstdc%2B%2B-v3/testsuite/ext/pb_ds/example/basic_multimap.cc"><tt>basic_multimap.cc</tt></a>);
+    in the second example, one would use an associative container
+    mapping each <tt><b>int</b></tt> to some size-type indicating
+    the number of times it logically occurs (see <a href=
+    "http://gcc.gnu.org/viewcvs/*checkout*/trunk/libstdc%2B%2B-v3/testsuite/ext/pb_ds/example/basic_multiset.cc"><tt>basic_multiset.cc</tt></a>).</p>
+
+    <p><a href=
+    "assoc_performance_tests.html#multimaps">Associative-Container
+    Performance Tests::Multimaps</a> quantifies some of these
+    points, and <a href=
+    "assoc_performance_tests.html#msc">Associative-Container
+    Performance Tests::Observations::Mapping-Semantics
+    Considerations</a> shows some simple calculations.</p>
+
+    <p><a href="assoc_examples.html#mmaps">Associative-Container
+    Examples::Multimaps</a> shows some simple examples of using
+    "multimaps".</p>
+
+    <p><a href="lu_based_containers.html">Design::Associative
+    Containers::List-Based Containers</a> discusses types of
+    containers especially suited as secondary
+    associative-containers.</p>
+
+    <h2><a name="pq" id="pq">Priority Queues</a></h2>
+
+    <h3><a name="pq_more_ops" id="pq_more_ops">Slightly Different
+    Methods</a></h3>
+
+    <p>Priority queues are containers that allow efficiently
+    inserting values and accessing the maximal value (in the sense
+    of the container's comparison functor); <i>i.e.</i>, their
+    interface supports <tt>push</tt> and <tt>pop</tt>. The STL's
+    priority queues indeed support these methods, but they support
+    little else. For algorithmic and software-engineering purposes,
+    other methods are needed:</p>
+
+    <ol>
+      <li>Many graph algorithms [<a href=
+      "references.html#clrs2001">clrs2001</a>] require increasing a
+      value in a priority queue (again, in the sense of the
+      container's comparison functor), or joining two
+      priority-queue objects.</li>
+
+      <li>It is sometimes necessary to erase an arbitrary value in
+      a priority queue. For example, consider the <tt>select</tt>
+      function for monitoring file descriptors:
+        <pre>
+<b>int</b> 
+    select
+    (<b>int</b> nfds,             
+        fd_set *readfds,                
+        fd_set *writefds,
+        fd_set *errorfds, 
+        <b>struct</b> timeval *timeout);
+</pre>then, as the <tt>select</tt> manual page [<a href=
+"references.html#select_man">select_man</a>] states:
+
+        <p><q>The nfds argument specifies the range of file
+        descriptors to be tested. The select() function tests file
+        descriptors in the range of 0 to nfds-1.</q></p>
+
+        <p>It stands to reason, therefore, that we might wish to
+        maintain a minimal value for <tt>nfds</tt>, and priority
+        queues immediately come to mind. Note, though, that when a
+        socket is closed, the minimal file description might
+        change; in the absence of an efficient means to erase an
+        arbitrary value from a priority queue, we might as well
+        avoid its use altogether.</p>
+
+        <p><a href="pq_examples.html#xref">Priority-Queue
+        Examples::Cross-Referencing</a> shows examples for these
+        types of operations.</p>
+      </li>
+
+      <li>STL containers typically support iterators. It is
+      somewhat unusual for <tt>std::priority_queue</tt> to omit
+      them (see, <i>e.g.</i>, [<a href=
+      "references.html#meyers01stl">meyers01stl</a>]). One might
+      ask why do priority queues need to support iterators, since
+      they are self-organizing containers with a different purpose
+      than abstracting sequences. There are several reasons:
+
+        <ol>
+          <li>Iterators (even in self-organizing containers) are
+          useful for many purposes, <i>e.g.</i>, cross-referencing
+          containers, serialization, and debugging code that uses
+          these containers.</li>
+
+          <li>The STL's hash-based containers support iterators,
+          even though they too are self-organizing containers with
+          a different purpose than abstracting sequences.</li>
+
+          <li>In STL-like containers, it is natural to specify the
+          interface of operations for modifying a value or erasing
+          a value (discussed previously) in terms of a iterators.
+          This is discussed further in <a href=
+          "pq_design.html#pq_it">Design::Priority
+          Queues::Iterators</a>. It should be noted that the STL's
+          containers also use iterators for accessing and
+          manipulating a specific value. <i>E.g.</i>, in hash-based
+          containers, one checks the existence of a key by
+          comparing the iterator returned by <tt>find</tt> to the
+          iterator returned by <tt>end</tt>, and not by comparing a
+          pointer returned by <tt>find</tt> to <tt>NULL</tt>.</li>
+        </ol>
+      </li>
+    </ol>
+
+    <p><a href="pq_performance_tests.html">Performance
+    Tests::Priority Queues</a> quantifies some of these points.</p>
+
+    <h3><a name="pq_ds_genericity" id="pq_ds_genericity">More Data
+    Structures and Traits</a></h3>
+
+    <p>There are three main implementations of priority queues: the
+    first employs a binary heap, typically one which uses a
+    sequence; the second uses a tree (or forest of trees), which is
+    typically less structured than an associative container's tree;
+    the third simply uses an associative container. These are
+    shown, respectively, in Figures <a href=
+    "#pq_different_underlying_dss">Underlying Priority-Queue
+    Data-Structures</a> A1 and A2, B, and C.</p>
+
+    <h6 class="c1"><a name="pq_different_underlying_dss" id=
+    "pq_different_underlying_dss"><img src=
+    "pq_different_underlying_dss.png" alt="no image" /></a></h6>
+
+    <h6 class="c1">Underlying Priority-Queue Data-Structures.</h6>
+
+    <p>No single implementation can completely replace any of the
+    others. Some have better <tt>push</tt> and <tt>pop</tt>
+    amortized performance, some have better bounded (worst case)
+    response time than others, some optimize a single method at the
+    expense of others, <i>etc.</i>. In general the "best"
+    implementation is dictated by the problem (see <a href=
+    "pq_performance_tests.html#pq_observations">Performance
+    Tests::Priority Queues::Observations</a>).</p>
+
+    <p>As with associative containers (see <a href=
+    "#assoc_ds_genericity">Associative Containers::Traits for
+    Underlying Data-Structures</a>), the more implementations
+    co-exist, the more necessary a traits mechanism is for handling
+    generic containers safely and efficiently. This is especially
+    important for priority queues, since the invalidation
+    guarantees of one of the most useful data structures - binary
+    heaps - is markedly different than those of most of the
+    others.</p>
+
+    <p><a href="pq_design.html#pq_traits">Design::Priority
+    Queues::Traits</a> discusses this further.</p>
+
+    <h3><a name="pq_binary_heap" id="pq_binary_heap">Binary Heap
+    Implementation</a></h3>
+
+    <p>Binary heaps are one of the most useful underlying
+    data structures for priority queues. They are very efficient in
+    terms of memory (since they don't require per-value structure
+    metadata), and have the best amortized <tt>push</tt> and
+    <tt>pop</tt> performance for primitive types (<i>e.g.</i>,
+    <tt><b>int</b></tt>s).</p>
+
+    <p>The STL's <tt>priority_queue</tt> implements this data
+    structure as an adapter over a sequence, typically
+    <tt>std::vector</tt> or <tt>std::deque</tt>, which correspond
+    to Figures <a href="#pq_different_underlying_dss">Underlying
+    Priority-Queue Data-Structures</a> A1 and A2, respectively.</p>
+
+    <p>This is indeed an elegant example of the adapter concept and
+    the algorithm/container/iterator decomposition (see [<a href=
+    "references.html#nelson96stlpq">nelson96stlpql</a>]). There are
+    possibly reasons, however, why a binary-heap priority queue
+    would be better implemented as a container instead of a
+    sequence adapter:</p>
+
+    <ol>
+      <li><tt>std::priority_queue</tt> cannot erase values from its
+      adapted sequence (irrespective of the sequence type). This
+      means that the memory use of an <tt>std::priority_queue</tt>
+      object is always proportional to the maximal number of values
+      it ever contained, and not to the number of values that it
+      currently contains (see <a href=
+      "priority_queue_text_pop_mem_usage_test.html">Priority Queue
+      Text <tt>pop</tt> Memory Use Test</a>); this implementation
+      of binary heaps acts very differently than other underlying
+      data structures (<i>e.g.</i>, pairing heaps).</li>
+
+      <li>Some combinations of adapted sequences and value types
+      are very inefficient or just don't make sense. If one uses
+      <tt>std::priority_queue&lt;std::vector&lt;std::string&gt;
+      &gt; &gt;</tt>, for example, then not only will each
+      operation perform a logarithmic number of
+      <tt>std::string</tt> assignments, but, furthermore, any
+      operation (including <tt>pop</tt>) can render the container
+      useless due to exceptions. Conversely, if one uses
+      <tt>std::priority_queue&lt;std::deque&lt;<b>int</b>&gt; &gt;
+      &gt;</tt>, then each operation uses incurs a logarithmic
+      number of indirect accesses (through pointers) unnecessarily.
+      It might be better to let the container make a conservative
+      deduction whether to use the structure in Figures <a href=
+      "#pq_different_underlying_dss">Underlying Priority-Queue
+      Data-Structures</a> A1 or A2.</li>
+
+      <li>There does not seem to be a systematic way to determine
+      what exactly can be done with the priority queue.
+
+        <ol>
+          <li>If <tt>p</tt> is a priority queue adapting an
+          <tt>std::vector</tt>, then it is possible to iterate over
+          all values by using <tt>&amp;p.top()</tt> and
+          <tt>&amp;p.top() + p.size()</tt>, but this will not work
+          if <tt>p</tt> is adapting an <tt>std::deque</tt>; in any
+          case, one cannot use <tt>p.begin()</tt> and
+          <tt>p.end()</tt>. If a different sequence is adapted, it
+          is even more difficult to determine what can be
+          done.</li>
+
+          <li>If <tt>p</tt> is a priority queue adapting an
+          <tt>std::deque</tt>, then the reference return by
+          <tt>p.top()</tt> will remain valid until it is popped,
+          but if <tt>p</tt> adapts an <tt>std::vector</tt>, the
+          next <tt>push</tt> will invalidate it. If a different
+          sequence is adapted, it is even more difficult to
+          determine what can be done.</li>
+        </ol>
+      </li>
+
+      <li>Sequence-based binary heaps can still implement
+      linear-time <tt>erase</tt> and <tt>modify</tt> operations.
+      This means that if one needs, <i>e.g.</i>, to erase a small
+      (say logarithmic) number of values, then one might still
+      choose this underlying data structure. Using
+      <tt>std::priority_queue</tt>, however, this will generally
+      change the order of growth of the entire sequence of
+      operations.</li>
+    </ol>
+  </div>
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
