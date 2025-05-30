@@ -99,17 +99,31 @@ Se familiariser avec un système de fichiers Linux, étudier Ext2, analyser la s
 - Calculer taille maximale d’un fichier en fonction du FS.
 
 ### Fonctions & outils typiques
-- `df -h` : espace disque utilisé  
-  → `df -h /mnt/ext2disk`
-- `df -ih` : utilisation des inodes  
-  → `df -ih /mnt/ext2disk`
-- `dumpe2fs` : analyser structure Ext2  
-  → `sudo dumpe2fs /dev/sdX1`
-- `debugfs` : inspecter inode, blocs  
-  → `sudo debugfs /dev/sdX1`
+- df(1) : Rapporter l'utilisation de l'espace disque du système de fichiers
+- dumpe2fs(8) : Afficher les informations du super-bloc et des groupes de blocs d'un système de fichiers ext2/3/4
+- dd(1) : Convertir et copier un fichier (souvent utilisé pour créer des images disque) (pas de section man standard).
+- mkfs.ext2(8) : Construire un système de fichiers ext2
+- hexdump(1) : Afficher un fichier en hexadécimal et autres formats
+- grep(1) : Filtrer des lignes correspondant à un motif
+- mount(8) : Monter un système de fichiers sur un point de montage
+- sudo(8) : Exécuter une commande en tant que superutilisateur
+- umount(8) : Démontrer un système de fichiers
+
+## 5. Examen du Système de Fichiers (debugfs)
+### Notions abordées :
+- debugfs comme outil interactif pour examiner et déboguer les systèmes de fichiers ext2/3/4 (CM3).
+- Accès aux statistiques globales du système de fichiers (super-bloc) via debugfs
+- Inspection des informations d'un inode spécifique (statistiques, pointeurs vers les blocs) via debugfs
+- Analyser les pointeurs de l'inode pour déterminer les niveaux d'indirection
+- Extraire les permissions et l'identifiant d'inode d'un fichier via debugfs
+
+### Fonctions utilisées :
+- debugfs(8) : Débogueur de système de fichiers pour ext2/3/4
+- echo(1) : Afficher une ligne de texte (utilisé ici pour passer des commandes à debugfs)
+- show_super_stats (commande interne debugfs) : Afficher les statistiques du super-bloc
+- stat (commande interne debugfs) : Afficher les informations d'un inode
 
 ---
-
 📌 **Remarques générales** :
 - Toujours tester avec précaution dans `/dev`, `/proc`, `/sys`.
 - Bien comprendre la différence entre *lien symbolique* et *copie*.
