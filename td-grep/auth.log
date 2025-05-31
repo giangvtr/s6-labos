@@ -1,0 +1,152 @@
+2025-03-14T11:18:14.099091+01:00 eii-eset-VirtualBox gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=120) by (uid=0)
+2025-03-14T11:18:14.136232+01:00 eii-eset-VirtualBox systemd-logind[1030]: New session c1 of user gdm.
+2025-03-14T11:18:14.190588+01:00 eii-eset-VirtualBox (systemd): pam_unix(systemd-user:session): session opened for user gdm(uid=120) by gdm(uid=0)
+2025-03-14T11:18:18.092629+01:00 eii-eset-VirtualBox polkitd[975]: Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+2025-03-14T11:18:27.153668+01:00 eii-eset-VirtualBox gdm-password]: gkr-pam: unable to locate daemon control file
+2025-03-14T11:18:27.153818+01:00 eii-eset-VirtualBox gdm-password]: gkr-pam: stashed password to try later in open session
+2025-03-14T11:18:27.191400+01:00 eii-eset-VirtualBox gdm-password]: pam_unix(gdm-password:session): session opened for user eii(uid=1001) by eii(uid=0)
+2025-03-14T11:18:27.217316+01:00 eii-eset-VirtualBox systemd-logind[1030]: New session 2 of user eii.
+2025-03-14T11:18:27.267667+01:00 eii-eset-VirtualBox (systemd): pam_unix(systemd-user:session): session opened for user eii(uid=1001) by eii(uid=0)
+2025-03-14T11:18:27.918591+01:00 eii-eset-VirtualBox gnome-keyring-daemon[1965]: keyring was in an invalid or unrecognized format: /home/eii/.local/share/keyrings/default.keyring
+2025-03-14T11:18:27.938212+01:00 eii-eset-VirtualBox gdm-password]: gkr-pam: unlocked login keyring
+2025-03-14T11:18:28.531324+01:00 eii-eset-VirtualBox gnome-keyring-daemon[1965]: The Secret Service was already initialized
+2025-03-14T11:18:28.532507+01:00 eii-eset-VirtualBox gnome-keyring-daemon[1965]: The PKCS#11 component was already initialized
+2025-03-14T11:18:28.532606+01:00 eii-eset-VirtualBox gnome-keyring-daemon[2160]: discover_other_daemon: 1
+2025-03-14T11:18:28.533036+01:00 eii-eset-VirtualBox gnome-keyring-daemon[2164]: discover_other_daemon: 1
+2025-03-14T11:18:28.534094+01:00 eii-eset-VirtualBox gnome-keyring-daemon[2162]: discover_other_daemon: 1
+2025-03-14T11:18:30.803459+01:00 eii-eset-VirtualBox polkitd[975]: Registered Authentication Agent for unix-session:2 (system bus name :1.77 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+2025-03-14T11:18:33.794901+01:00 eii-eset-VirtualBox gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+2025-03-14T11:18:33.807140+01:00 eii-eset-VirtualBox systemd-logind[1030]: Session c1 logged out. Waiting for processes to exit.
+2025-03-14T11:18:33.880950+01:00 eii-eset-VirtualBox polkitd[975]: Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+2025-03-14T11:18:33.887686+01:00 eii-eset-VirtualBox systemd-logind[1030]: Removed session c1.
+2025-03-14T11:19:31.264345+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/sbin/usermod -a -G adm eii
+2025-03-14T11:19:31.266418+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:19:31.306763+01:00 eii-eset-VirtualBox usermod[3025]: add 'eii' to group 'adm'
+2025-03-14T11:19:31.307036+01:00 eii-eset-VirtualBox usermod[3025]: add 'eii' to shadow group 'adm'
+2025-03-14T11:19:31.333921+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T11:19:33.399694+01:00 eii-eset-VirtualBox pkexec: pam_unix(polkit-1:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:19:33.400730+01:00 eii-eset-VirtualBox pkexec[3040]: eii: Executing command [USER=root] [TTY=unknown] [CWD=/home/eii] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+2025-03-14T11:20:35.503233+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/sbin/usermod -a -G adm eii
+2025-03-14T11:20:35.504889+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:20:35.580312+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T11:21:13.772140+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/sbin/adduser eii adm
+2025-03-14T11:21:13.775143+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:21:13.917738+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T11:22:30.642774+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/bin/cat /var/log/auth.log
+2025-03-14T11:22:30.643258+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:22:30.645721+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T11:22:54.871968+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/bin/cat /var/log/auth.log
+2025-03-14T11:22:54.874766+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:22:54.879339+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T11:25:01.718245+01:00 eii-eset-VirtualBox CRON[3318]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T11:25:01.724463+01:00 eii-eset-VirtualBox CRON[3318]: pam_unix(cron:session): session closed for user root
+2025-03-14T11:30:01.739988+01:00 eii-eset-VirtualBox CRON[3335]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T11:30:01.744457+01:00 eii-eset-VirtualBox CRON[3335]: pam_unix(cron:session): session closed for user root
+2025-03-14T11:31:02.234104+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/var/log ; USER=root ; COMMAND=/usr/sbin/adduser eii systemd-journal
+2025-03-14T11:31:02.249639+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:31:02.332125+01:00 eii-eset-VirtualBox usermod[3341]: add 'eii' to group 'systemd-journal'
+2025-03-14T11:31:02.332631+01:00 eii-eset-VirtualBox usermod[3341]: add 'eii' to shadow group 'systemd-journal'
+2025-03-14T11:31:02.372098+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T11:34:19.541540+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/var/log ; USER=root ; COMMAND=/usr/bin/cat /var/log/auth.log
+2025-03-14T11:34:19.544104+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:34:19.556560+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T11:35:01.754565+01:00 eii-eset-VirtualBox CRON[3364]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T11:35:01.761539+01:00 eii-eset-VirtualBox CRON[3364]: pam_unix(cron:session): session closed for user root
+2025-03-14T11:37:59.159947+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/sbin/deluser eii adm
+2025-03-14T11:37:59.161159+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:37:59.276907+01:00 eii-eset-VirtualBox gpasswd[3422]: members of group adm set by root to syslog,mpressig
+2025-03-14T11:37:59.283940+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T11:38:07.590124+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/sbin/deluser eii systemd-journal
+2025-03-14T11:38:07.591206+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T11:38:07.721936+01:00 eii-eset-VirtualBox gpasswd[3432]: members of group systemd-journal set by root to 
+2025-03-14T11:38:07.728383+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T11:38:37.924925+01:00 eii-eset-VirtualBox systemd-logind[1030]: The system will reboot now!
+2025-03-14T11:38:37.967408+01:00 eii-eset-VirtualBox systemd-logind[1030]: System is rebooting.
+2025-03-14T11:38:38.018361+01:00 eii-eset-VirtualBox gdm-password]: pam_unix(gdm-password:session): session closed for user eii
+2025-03-14T11:38:55.905600+01:00 eii-eset-VirtualBox systemd-logind[735]: New seat seat0.
+2025-03-14T11:38:55.905608+01:00 eii-eset-VirtualBox systemd-logind[735]: Watching system buttons on /dev/input/event0 (Power Button)
+2025-03-14T11:38:55.905616+01:00 eii-eset-VirtualBox systemd-logind[735]: Watching system buttons on /dev/input/event1 (Sleep Button)
+2025-03-14T11:38:55.905640+01:00 eii-eset-VirtualBox systemd-logind[735]: Watching system buttons on /dev/input/event2 (AT Translated Set 2 keyboard)
+2025-03-14T11:38:55.948822+01:00 eii-eset-VirtualBox polkitd[690]: Loading rules from directory /etc/polkit-1/rules.d
+2025-03-14T11:38:55.955717+01:00 eii-eset-VirtualBox polkitd[690]: Loading rules from directory /usr/share/polkit-1/rules.d
+2025-03-14T11:38:56.034938+01:00 eii-eset-VirtualBox polkitd[690]: Finished loading, compiling and executing 16 rules
+2025-03-14T11:38:56.051768+01:00 eii-eset-VirtualBox polkitd[690]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+2025-03-14T11:39:00.972839+01:00 eii-eset-VirtualBox gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=120) by (uid=0)
+2025-03-14T11:39:01.066565+01:00 eii-eset-VirtualBox systemd-logind[735]: New session c1 of user gdm.
+2025-03-14T11:39:01.275218+01:00 eii-eset-VirtualBox (systemd): pam_unix(systemd-user:session): session opened for user gdm(uid=120) by gdm(uid=0)
+2025-03-14T11:39:06.610636+01:00 eii-eset-VirtualBox polkitd[690]: Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+2025-03-14T11:45:01.727133+01:00 eii-eset-VirtualBox CRON[1806]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T11:45:01.733308+01:00 eii-eset-VirtualBox CRON[1806]: pam_unix(cron:session): session closed for user root
+2025-03-14T11:55:01.880711+01:00 eii-eset-VirtualBox CRON[1821]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T11:55:01.886794+01:00 eii-eset-VirtualBox CRON[1821]: pam_unix(cron:session): session closed for user root
+2025-03-14T12:05:01.037382+01:00 eii-eset-VirtualBox CRON[1976]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T12:05:01.041897+01:00 eii-eset-VirtualBox CRON[1976]: pam_unix(cron:session): session closed for user root
+2025-03-14T12:09:55.037524+01:00 eii-eset-VirtualBox dbus-daemon[673]: [system] Failed to activate service 'org.bluez': timed out (service_start_timeout=25000ms)
+2025-03-14T12:15:01.163182+01:00 eii-eset-VirtualBox CRON[2032]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T12:15:01.174087+01:00 eii-eset-VirtualBox CRON[2032]: pam_unix(cron:session): session closed for user root
+2025-03-14T12:17:01.188952+01:00 eii-eset-VirtualBox CRON[2035]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T12:17:01.226817+01:00 eii-eset-VirtualBox CRON[2035]: pam_unix(cron:session): session closed for user root
+2025-03-14T12:25:01.351498+01:00 eii-eset-VirtualBox CRON[2046]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T12:25:01.364101+01:00 eii-eset-VirtualBox CRON[2046]: pam_unix(cron:session): session closed for user root
+2025-03-14T12:30:01.418971+01:00 eii-eset-VirtualBox CRON[2056]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T12:30:01.424188+01:00 eii-eset-VirtualBox CRON[2056]: pam_unix(cron:session): session closed for user root
+2025-03-14T12:35:01.494079+01:00 eii-eset-VirtualBox CRON[2064]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T12:35:01.505637+01:00 eii-eset-VirtualBox CRON[2064]: pam_unix(cron:session): session closed for user root
+2025-03-14T12:45:01.945849+01:00 eii-eset-VirtualBox CRON[2077]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T12:45:01.950266+01:00 eii-eset-VirtualBox CRON[2077]: pam_unix(cron:session): session closed for user root
+2025-03-14T12:55:01.195018+01:00 eii-eset-VirtualBox CRON[2089]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T12:55:01.201930+01:00 eii-eset-VirtualBox CRON[2089]: pam_unix(cron:session): session closed for user root
+2025-03-14T13:05:01.702142+01:00 eii-eset-VirtualBox CRON[2100]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T13:05:01.709701+01:00 eii-eset-VirtualBox CRON[2100]: pam_unix(cron:session): session closed for user root
+2025-03-14T13:14:51.747273+01:00 eii-eset-VirtualBox gdm-password]: gkr-pam: unable to locate daemon control file
+2025-03-14T13:14:51.747666+01:00 eii-eset-VirtualBox gdm-password]: gkr-pam: stashed password to try later in open session
+2025-03-14T13:14:51.767966+01:00 eii-eset-VirtualBox gdm-password]: pam_unix(gdm-password:session): session opened for user eii(uid=1001) by eii(uid=0)
+2025-03-14T13:14:51.806955+01:00 eii-eset-VirtualBox systemd-logind[735]: New session 13 of user eii.
+2025-03-14T13:14:51.874767+01:00 eii-eset-VirtualBox (systemd): pam_unix(systemd-user:session): session opened for user eii(uid=1001) by eii(uid=0)
+2025-03-14T13:14:52.433807+01:00 eii-eset-VirtualBox gnome-keyring-daemon[2168]: keyring was in an invalid or unrecognized format: /home/eii/.local/share/keyrings/default.keyring
+2025-03-14T13:14:52.467761+01:00 eii-eset-VirtualBox gdm-password]: gkr-pam: unlocked login keyring
+2025-03-14T13:14:53.125649+01:00 eii-eset-VirtualBox gnome-keyring-daemon[2168]: The Secret Service was already initialized
+2025-03-14T13:14:53.126183+01:00 eii-eset-VirtualBox gnome-keyring-daemon[2355]: discover_other_daemon: 1
+2025-03-14T13:14:53.154440+01:00 eii-eset-VirtualBox gnome-keyring-daemon[2168]: The PKCS#11 component was already initialized
+2025-03-14T13:14:53.156507+01:00 eii-eset-VirtualBox gnome-keyring-daemon[2362]: discover_other_daemon: 1
+2025-03-14T13:14:53.166864+01:00 eii-eset-VirtualBox gnome-keyring-daemon[2363]: discover_other_daemon: 1
+2025-03-14T13:14:55.772563+01:00 eii-eset-VirtualBox polkitd[690]: Registered Authentication Agent for unix-session:13 (system bus name :1.80 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+2025-03-14T13:14:58.478005+01:00 eii-eset-VirtualBox gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+2025-03-14T13:14:58.490363+01:00 eii-eset-VirtualBox systemd-logind[735]: Session c1 logged out. Waiting for processes to exit.
+2025-03-14T13:14:58.557456+01:00 eii-eset-VirtualBox polkitd[690]: Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+2025-03-14T13:14:58.570605+01:00 eii-eset-VirtualBox systemd-logind[735]: Removed session c1.
+2025-03-14T13:15:01.055776+01:00 eii-eset-VirtualBox CRON[3127]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T13:15:01.059979+01:00 eii-eset-VirtualBox CRON[3127]: pam_unix(cron:session): session closed for user root
+2025-03-14T13:15:08.921232+01:00 eii-eset-VirtualBox (sd-pam): pam_unix(systemd-user:session): session closed for user gdm
+2025-03-14T13:15:25.214417+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/bin/cat /var/log/auth.log
+2025-03-14T13:15:25.217063+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T13:15:25.222848+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T13:15:54.668905+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/1 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/bin/login eset
+2025-03-14T13:15:54.670744+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T13:15:54.681221+01:00 eii-eset-VirtualBox login[3239]: PAM unable to dlopen(pam_lastlog.so): /usr/lib/security/pam_lastlog.so: cannot open shared object file: No such file or directory
+2025-03-14T13:15:54.682197+01:00 eii-eset-VirtualBox login[3239]: PAM adding faulty module: pam_lastlog.so
+2025-03-14T13:15:58.577810+01:00 eii-eset-VirtualBox pkexec: pam_unix(polkit-1:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T13:15:58.579678+01:00 eii-eset-VirtualBox pkexec[3284]: eii: Executing command [USER=root] [TTY=unknown] [CWD=/home/eii] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+2025-03-14T13:16:01.229888+01:00 eii-eset-VirtualBox login[3239]: pam_unix(login:auth): authentication failure; logname=eii uid=0 euid=0 tty=/dev/pts/2 ruser= rhost=  user=eset
+2025-03-14T13:16:04.557279+01:00 eii-eset-VirtualBox login[3239]: FAILED LOGIN (1) on '/dev/pts/2' FOR 'eset', Authentication failure
+2025-03-14T13:16:10.973676+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T13:16:12.741073+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/1 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/bin/login eset
+2025-03-14T13:16:12.742940+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T13:16:12.751039+01:00 eii-eset-VirtualBox login[3300]: PAM unable to dlopen(pam_lastlog.so): /usr/lib/security/pam_lastlog.so: cannot open shared object file: No such file or directory
+2025-03-14T13:16:12.751289+01:00 eii-eset-VirtualBox login[3300]: PAM adding faulty module: pam_lastlog.so
+2025-03-14T13:16:24.187114+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/bin/cat /var/log/auth.log
+2025-03-14T13:16:24.187458+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T13:16:24.196984+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T13:16:41.630842+01:00 eii-eset-VirtualBox login[3300]: pam_unix(login:session): session opened for user eset(uid=1002) by eset(uid=0)
+2025-03-14T13:16:58.993415+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/bin/cat /var/log/auth.log
+2025-03-14T13:16:58.994021+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T13:16:58.997018+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T13:17:01.138813+01:00 eii-eset-VirtualBox CRON[3476]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2025-03-14T13:17:01.141452+01:00 eii-eset-VirtualBox CRON[3476]: pam_unix(cron:session): session closed for user root
+2025-03-14T13:17:07.754051+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:auth): authentication failure; logname=eset uid=1002 euid=0 tty=/dev/pts/2 ruser=eset rhost=  user=eset
+2025-03-14T13:17:18.039315+01:00 eii-eset-VirtualBox sudo:     eset : 3 incorrect password attempts ; TTY=pts/2 ; PWD=/home/eset ; USER=root ; COMMAND=/usr/bin/cat /var/log/auth.log
+2025-03-14T13:17:20.630844+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/bin/cat /var/log/auth.log
+2025-03-14T13:17:20.632283+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)
+2025-03-14T13:17:20.637403+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session closed for user root
+2025-03-14T13:20:02.196101+01:00 eii-eset-VirtualBox sudo:      eii : TTY=pts/0 ; PWD=/home/eii ; USER=root ; COMMAND=/usr/bin/cp /var/log/auth.log /home/eii/.
+2025-03-14T13:20:02.206322+01:00 eii-eset-VirtualBox sudo: pam_unix(sudo:session): session opened for user root(uid=0) by eii(uid=1001)

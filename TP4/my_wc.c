@@ -61,7 +61,6 @@ void process_file(const char *fileName, int lflag, const char *color, const char
 }
 
 int main(int argc, char* argv[], char* envp[]) {
-
     int c;                     //To read the option
     int fflag = 0;
     int lflag = 0;
