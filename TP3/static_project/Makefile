@@ -1,40 +1,64 @@
-# Compiler and flags
-CC=gcc
-CFLAGS= -Wall -Wextra -MMD
-LDFLAGS= -static
-BUILDLIB=ar
-LIBFLAGS=-rv
-LDLIBS=libmyutil.a
-myprogram= myhello
-myprogram2= myhello2
+# --------------------------
+# Compiler and Archiver Setup
+# --------------------------
 
-# Default target
-all: $(myprogram) $(myprogram2) $(LDLIBS)
+CC       = gcc                 # C compiler
+CFLAGS   = -Wall -Wextra -MMD  # Compiler flags: all warnings + dependency generation
+LDFLAGS  = -static             # Linker flags: force static linking
+AR       = rv                  # Archiver tool to build static libraries
+ARFLAGS  = rcs                 # Flags for 'ar': replace, create index, be silent
 
-#Construit la lib
-$(LDLIBS): myfunc.o mytools.o
-	$(BUILDLIB) $(LIBFLAGS) $@ $^
+# --------------------------
+# File Definitions
+# --------------------------
 
-# Compiles the .c file into the corresponding .o file
-%.o : %.c
+LIBNAME     = libmyutil.a           # Static library output
+LIBOBJECTS  = myfunc.o mytools.o    # Object files for the static library
+TARGETS     = myhello myhello2      # Final executables
+
+# --------------------------
+# Default Rule: Build everything
+# --------------------------
+
+all: $(TARGETS)
+
+# --------------------------
+# Static Library Rule
+# --------------------------
+
+#Equivalent: ar -rv libmyutil.a myfunc.o mytools.o
+$(LIBNAME): $(LIBOBJECTS)
+	$(AR) $(ARFLAGS) $@ $^
+
+# --------------------------
+# Pattern Rule: Compile .c -> .o
+# --------------------------
+
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# --------------------------
+# Link Targets with Static Library
+# --------------------------
+# Equivalent: gcc myhello.o libmyutil.a -o myhello
 
-# Rules for the final target program
-$(myprogram): myfunc.o myhello.o mytools.o libmyutil.a
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+myhello: myhello.o $(LIBNAME)
+	$(CC) $(LDFLAGS) $^ -o $@
 
-$(myprogram2): myfunc.o myhello2.o mytools.o libmyutil.a
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
-
-include $(wildcard *.d)
+myhello2: myhello2.o $(LIBNAME)
+	$(CC) $(LDFLAGS) $^ -o $@
 
 
-# A clean target
-clean :
-	rm -f $ *.o
-	rm -f *.d
-	rm -f $(myprogram)
-	rm -f $(myprogram2)
-	rm -f *.a
+# --------------------------
+# Include auto-generated dependency files
+# --------------------------
+
+-include $(wildcard *.d)
+
+# --------------------------
+# Clean Rule
+# --------------------------
+
+clean:
+	rm -f *.o *.d *.a $(TARGETS)
 

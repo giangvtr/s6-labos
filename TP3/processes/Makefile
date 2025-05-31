@@ -15,7 +15,6 @@ all: $(myprogram) $(myprogram2) $(myprogram3)
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-
 # Rules for the final target program
 $(myprogram): $(myprogram).o
 	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
