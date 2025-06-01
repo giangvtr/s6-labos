@@ -1,4 +1,4 @@
- #!/bin/bash	
+#!/bin/bash
 DIR=original_images;
 mkdir "$DIR" -p;	
 i=1;

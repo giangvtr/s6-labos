@@ -2,30 +2,31 @@
 ---
 
 ### Question 1 : Tester la commande wc
-
-* **Tâches :** Tester la commande `wc` sur un fichier pour comprendre son comportement par défaut.
-
+`wc somefile.txt`
 ### Question 2 : Trouver la définition du descripteur standard
+`grep STDIN_FILENO /usr/include/unistd.h`
 
-* **Tâches :** Utiliser `grep` pour trouver la définition du descripteur de fichier standard dans le fichier d'en-tête `<unistd.h>`.
-* Answer : `grep STD /usr/include/unistd.h`
-* **Fonctions / Commandes à utiliser :**
-    * `grep(1)`
-    * `ls(1)` (potentiellement pour trouver le chemin de `/usr/include`).
 
 ### Question 3 : Compter les octets de l'entrée standard
+```c++
+#include <stdio.h>
+#include <unistd.h>
 
-* **Tâches :** Écrire un programme C `my_wc` qui lit l'entrée standard et affiche le nombre total d'octets lus, en utilisant une fonction `countByte(int fd)`.
-* **Notions abordées :**
-    * Programmation en C et la fonction `main` (CM5).
-    * Lecture à partir d'un descripteur de fichier (`read`) (CM5).
-    * Entrée standard (`stdin`) et son descripteur (0) (Lab 2, CM2, CM5).
-    * Affichage formaté (`printf`) (CM5).
-* **Fonctions / Commandes à utiliser :**
-    * `read(2)`
-    * `printf(3)`
-    * Fichier d'en-tête `<unistd.h>`.
-    * `echo(1)` (pour tester avec une entrée pipe).
+int countByte(int fd) {
+    int count = 0;
+    char ch;
+    while (read(fd, &ch, 1) != 0) {
+        count++;
+    }
+    return count;
+}
+
+int main() {
+    int nbbytes = countByte(STDIN_FILENO);
+    printf("%d\n", nbbytes);
+    return 0;
+}
+```
 
 ### Question 4 : Écrire un Makefile de base
 
@@ -35,47 +36,133 @@
     * `gcc(1)`
     * `rm(1)`
 
-### Question 5 : Gérer les fichiers en entrée
+### Question 5 : Count bytes from files or stdin
+```c++
+int main(int argc, char* argv[]) {
+    if (argc == 1) {
+        int nbbytes = countByte(STDIN_FILENO);
+        printf("%d\n", nbbytes);
+    } else {
+        for (int i = 1; i < argc; ++i) {
+            int fd = open(argv[i], O_RDONLY);
+            if (fd == -1) {
+                perror(argv[i]);
+                continue;
+            }
+            int nbbytes = countByte(fd);
+            printf("%d %s\n", nbbytes, argv[i]);
+            close(fd);
+        }
+    }
+    return 0;
+}
+```
 
-* **Tâches :** Modifier le programme pour qu'il accepte des noms de fichiers en argument et compte les octets de chaque fichier, ou de l'entrée standard si aucun fichier n'est donné. Afficher le nom du fichier pour chaque résultat.
-* **Notions abordées :**
-    * Arguments de la ligne de commande (`argc`, `argv`) (CM5).
-    * Gestion conditionnelle (boucles, if) pour traiter plusieurs fichiers ou l'entrée standard.
-    * Ouverture et fermeture de fichiers spécifiques (`open`, `close`) (CM5).
-    * Lecture à partir de différents descripteurs de fichiers (ceux obtenus par `open`) (CM5).
-* **Fonctions / Commandes à utiliser :**
-    * `open(2)`
-    * `close(2)`
-    * `read(2)`
-    * `printf(3)`
+### Question 6 : Error messages with `errno` and `strerror`
 
-### Question 6 : Ajouter la gestion des erreurs
+```c++
+#include <errno.h>
+#include <string.h>
 
-* **Tâches :** Ajouter la gestion des erreurs (fichier non trouvable, permissions) et afficher les messages d'erreur sur la sortie d'erreur standard (`stderr`) en utilisant `errno` et `strerror`. Le programme doit imiter `wc -c`.
-* **Notions abordées :**
-    * Gestion des erreurs système en C (`errno`, `strerror`) (CM5).
-    * Sortie d'erreur standard (`stderr`) (CM2, CM5).
-    * Affichage sur stderr (`fprintf`) (CM5).
-    * Permissions de fichiers (pour générer des erreurs de permission) (Lab 2, CM3).
-* **Fonctions / Commandes à utiliser :**
-    * `errno(3)`
-    * `strerror(3)`
-    * `fprintf(3)`
+int main(int argc, char* argv[]) {
+    char* nomprog = argv[0];
+    if (argc == 1) {
+        int nbbytes = countByte(STDIN_FILENO);
+        printf("%d\n", nbbytes);
+    } else {
+        for (int i = 1; i < argc; ++i) {
+            int fd = open(argv[i], O_RDONLY);
+            if (fd == -1) {
+                fprintf(stderr, "%s: %s: %s\n", nomprog, argv[i], strerror(errno));
+                continue;
+            }
+            int nbbytes = countByte(fd);
+            printf("%d %s\n", nbbytes, argv[i]);
+            close(fd);
+        }
+    }
+    return 0;
+}
+```
 
-### Question 7 : Parallélisation avec processus
+### Question 7 : Option -f for parallel processing
+```c++
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/wait.h>
 
-* **Tâches :** Ajouter une option `-f` pour que le traitement de chaque fichier soit effectué par un processus enfant distinct, permettant une exécution potentiellement simultanée (parallèle ou concurrente selon le nombre de cœurs).
-* **Notions abordées :**
-    * Parsing des options de ligne de commande avec `getopt` (CM5).
-    * Création de nouveaux processus (`fork`) (Lab 3, CM4).
-    * Attente de la fin des processus enfants (`wait`) (Lab 3, CM4).
-    * Exécution simultanée de code (parallélisme/concurrence) (CM4).
-* **Fonctions / Commandes à utiliser :**
-    * `getopt(3)` (Note: La source liste `getopt(1)`, mais c'est la fonction C qui est pertinente ici)
-    * `fork(2)`
-    * `wait(2)`
+void process_file(const char *fileName, const char *program) {
+    int fd = open(fileName, O_RDONLY);
+    if (fd == -1) {
+        fprintf(stderr, "%s: %s: %s\n", program, fileName, strerror(errno));
+        return;
+    }
+    int result = countByte(fd);
+    printf("%d %s\n", result, fileName);
+    close(fd);
+}
 
-### Question 8 : Installation du programme
+int main(int argc, char* argv[]) {
+    int c;
+    int fflag = 0;
+    char* nomprog = argv[0];
+
+    while ((c = getopt(argc, argv, "f")) != -1) {
+        switch (c) {
+            case 'f':
+                fflag = 1;
+                break;
+            default:
+                fprintf(stderr, "Usage: %s [-f] file...\n", nomprog);
+                exit(EXIT_FAILURE);
+        }
+    }
+
+    if (argc == optind) {
+        int nbbytes = countByte(STDIN_FILENO);
+        printf("%d\n", nbbytes);
+        return 0;
+    }
+
+    if (!fflag) {
+        for (int i = optind; i < argc; ++i)
+            process_file(argv[i], nomprog);
+    } else {
+        int num_files = argc - optind;
+        pid_t *pids = malloc(num_files * sizeof(pid_t));
+        if (!pids) {
+            perror("malloc");
+            exit(EXIT_FAILURE);
+        }
+        int j = 0;
+        for (int i = optind; i < argc; ++i, ++j) {
+            pid_t pid = fork();
+            if (pid == -1) {
+                fprintf(stderr, "Fork failed\n");
+                continue;
+            }
+            if (pid == 0) {
+                process_file(argv[i], nomprog);
+                exit(EXIT_SUCCESS);
+            } else {
+                pids[j] = pid;
+            }
+        }
+        for (int i = 0; i < num_files; ++i) {
+            int status;
+            waitpid(pids[i], &status, 0);
+        }
+        free(pids);
+    }
+    return 0;
+}
+```
+
+### Question 8 : Full Makefile
 
 - **Tâches :**  
   Modifier le Makefile pour ajouter les règles `install` (copie de l'exécutable dans `/usr/local/bin`) et `distclean` (suppression de l'exécutable installé), nécessitant les privilèges root.
@@ -87,23 +174,21 @@
 
 ---
 
-### Question 9 : Ajouter l'option de comptage de lignes
-
-- **Tâches :**  
-  Ajouter une option `-l` pour compter les lignes au lieu des octets, en créant une nouvelle fonction `countLine(int fd)`. Le programme doit imiter `wc -l`.
-
-- **Notions abordées :**  
-  - Gestion d'options multiples avec `getopt` (CM5).  
-  - Logique conditionnelle pour choisir la fonction de comptage (`countByte` ou `countLine`).  
-  - Comptage de lignes (lecture de caractères ou de blocs, recherche du caractère newline `\n`).
-
-- **Fonctions / Commandes à utiliser :**  
-  - `getopt(3)`  
-  - `read(2)` (pour lire le contenu du fichier/stream)
+### Question 9 : Option -l for line count
+```c++
+int countLine(int fd) {
+    int count = 0;
+    char ch;
+    while (read(fd, &ch, 1) != 0) {
+        if (ch == '\n') count++;
+    }
+    return count;
+}
+```
 
 ---
 
-### Question 10 : Utilisation d'une variable d'environnement
+### Question 10 : Color output with MY_WC_COLOR
   Modifier l'affichage pour colorer les nombres (bytes ou lignes) en rouge si la variable d'environnement `MY_WC_COLOR` a la valeur `"yes"`.
 
 - **Notions abordées :**  
@@ -117,13 +202,13 @@
     Doing cursor movements in terminal UIs.
     Making output visually dynamic.  
   - `ascii(7)` (code ASCII)
-- **How to understand console_codes(4)**:
-  * Most Common Sequence: `ESC [ ... m` or `\033[ ... m` to delimiter the border. The parameters inside can set text 
+> **How to understand console_codes(4)**:
+>  * Most Common Sequence: `ESC [ ... m` or `\033[ ... m` to delimiter the border. The parameters inside can set text 
 attributes like color and bold.
-  * Some meaning :
-    * 0 = Reset all attributes (back to normal)
-    * 1 = Bold 
-    * 4 = Underline 
-    * 30–37 = Set text color (30=black, 31=red, 32=green, ..., 34=blue, ..., 37=white)
-    * 40–47 = Set background color (same color codes as above, but for background)
+>  * Some meaning :
+>    * 0 = Reset all attributes (back to normal)
+>    * 1 = Bold 
+>    * 4 = Underline 
+>    * 30–37 = Set text color (30=black, 31=red, 32=green, ..., 34=blue, ..., 37=white)
+>    * 40–47 = Set background color (same color codes as above, but for background)
 
