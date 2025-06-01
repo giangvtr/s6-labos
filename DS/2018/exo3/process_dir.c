@@ -94,12 +94,11 @@ int read_dirQ7(char * dir_name, int aflag) {
             //Inspire by example code in stat(2)
             struct stat sb;
             char * file_name = my_concat(dir_name, ent->d_name);
-            printf("Looking at %s \n", file_name);
             if (file_name == NULL) {
                 perror("Concat file name failed");
                 exit(EXIT_FAILURE);
             }
-            if (lstat(file_name, &sb) == -1) {
+            if (stat(file_name, &sb) == -1) {
                 perror("lstat");
                 free(file_name);
                 continue;
