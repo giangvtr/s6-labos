@@ -8,6 +8,7 @@
 ### Question 2 : Trouver la définition du descripteur standard
 
 * **Tâches :** Utiliser `grep` pour trouver la définition du descripteur de fichier standard dans le fichier d'en-tête `<unistd.h>`.
+* Answer : `grep STD /usr/include/unistd.h`
 * **Fonctions / Commandes à utiliser :**
     * `grep(1)`
     * `ls(1)` (potentiellement pour trouver le chemin de `/usr/include`).
@@ -103,16 +104,26 @@
 ---
 
 ### Question 10 : Utilisation d'une variable d'environnement
-
-- **Tâches :**  
   Modifier l'affichage pour colorer les nombres (bytes ou lignes) en rouge si la variable d'environnement `MY_WC_COLOR` a la valeur `"yes"`.
 
 - **Notions abordées :**  
-  - Variables d'environnement et leur accès en C (`getenv`, `environ`) (Lab 1, CM2, CM5).  
-  - Codes de console ANSI pour la coloration du texte dans le terminal.  
+  - Variables d'environnement et leur accès en C (`getenv`, `environ`) (Lab 1, CM2, CM5).
 
 - **Fonctions / Commandes à utiliser :**  
-  - `getenv(3)`  
+  - `getenv(3)` : getenv("HOME") will return home directory path
   - `environ(7)` (la variable globale)  
-  - `console_codes(4)` (manuel décrivant les codes)  
-  - `ascii(7)` (manuel décrivant les caractères ASCII)
+  - `console_codes(4)` : Documents escape sequences used to control the Linux console, like changing colors, moving the cursor, clearing the screen, etc.
+    Styling text (bold, underline, colors).
+    Doing cursor movements in terminal UIs.
+    Making output visually dynamic.  
+  - `ascii(7)` (code ASCII)
+- **How to understand console_codes(4)**:
+  * Most Common Sequence: `ESC [ ... m` or `\033[ ... m` to delimiter the border. The parameters inside can set text 
+attributes like color and bold.
+  * Some meaning :
+    * 0 = Reset all attributes (back to normal)
+    * 1 = Bold 
+    * 4 = Underline 
+    * 30–37 = Set text color (30=black, 31=red, 32=green, ..., 34=blue, ..., 37=white)
+    * 40–47 = Set background color (same color codes as above, but for background)
+

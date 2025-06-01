@@ -5,8 +5,8 @@
 CC       = gcc                 # C compiler
 CFLAGS   = -Wall -Wextra -MMD  # Compiler flags: all warnings + dependency generation
 LDFLAGS  = -static             # Linker flags: force static linking
-AR       = rv                  # Archiver tool to build static libraries
-ARFLAGS  = rcs                 # Flags for 'ar': replace, create index, be silent
+AR       = ar                  # Archiver tool to build static libraries
+ARFLAGS  = -rv                 # Flags for 'ar': replace, create index, be silent
 
 # --------------------------
 # File Definitions
@@ -20,7 +20,7 @@ TARGETS     = myhello myhello2      # Final executables
 # Default Rule: Build everything
 # --------------------------
 
-all: $(TARGETS)
+all: $(TARGETS) $(LIBNAME)
 
 # --------------------------
 # Static Library Rule

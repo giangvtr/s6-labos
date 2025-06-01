@@ -21,7 +21,7 @@
     *   Utilisation de l'option `--help` pour obtenir de l'aide ainsi que des pages de manuel (`man`).
     *   Structure des pages `man` : SYNOPSIS, DESCRIPTION, RETURN VALUE, ERRORS.
     *   Sections numérotées des pages `man` (commandes, appels système, sous-routines C, etc.). Trouver une page spécifique avec la section (`man 2 stat`).
-    *   Navigation et recherche dans une page `man` (`/`, `?`, `n`, `p`).
+    *   Navigation et recherche dans une page `man` (`/`- search forward, `?` - search backward, `n`-jump to next match), `p`).
     *   Productivité en console : historique des commandes (flèches, Ctrl+R), complétion par tabulation (`Tab`), copier/coller (double/triple/middle click).
     *   Gestion des caractères spéciaux dans les noms de fichiers, notamment les espaces, à l'aide de guillemets (`"`).
     *   Interruption (`Ctrl+C`), suspension (`Ctrl+Z`) et reprise (`fg`, `bg`) de processus en console.
@@ -95,10 +95,7 @@
 
 - **Commandes utiles dans les scripts** :
   - `grep`, `egrep`, `wc`, `sort`, `uniq`, `wget`, `zcat`, `mv`, `cp`, `source`, `export`, `read`, `echo`, `printf`.
-
-- **Liens avec cours & TD** :
-  - **CM2** : écriture de scripts, variables, tests, boucles, redirections, `&&`, `||`, `;`.
-  - **CM4 / CM5** : environnement de processus, `getenv`, `argc/argv` (en C).
-  - **TD1 / Lab 4** : regex avec `grep`, analyse avec `wc`.
+  - Answer: 
+`wget -O - "$URL" | zcat | egrep -o '^\d+\.\d+\.\d+\.\d+\b|^([a-fA-F0-9]+\:){7}[a-fA-F0-9]+\b' | sort | uniq -c > frequency.log`
 
 
